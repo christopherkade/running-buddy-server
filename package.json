@@ -2,9 +2,8 @@
   "name": "running-buddy-server",
   "version": "1.0.0",
   "description": "Server side of Running-Buddy",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "engines": {
+    "node": ">=8.9.4"
   },
   "repository": {
     "type": "git",
@@ -16,7 +15,41 @@
     "url": "https://github.com/christopherkade/running-buddy-server/issues"
   },
   "homepage": "https://github.com/christopherkade/running-buddy-server#readme",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
+    "start": "npm run dev",
+    "prod": "node dist/index.js",
+    "_rm-build-prod": "rimraf dist",
+    "_build-prod": "cross-env NODE_ENV=production babel src --out-dir dist --copy-files",
+    "build-prod": "npm run _rm-build-prod && npm run _build-prod",
+    "test": "cross-env NODE_ENV=test mocha --opts mocha.opts",
+    "lint": "eslint src config test"
+  },
   "dependencies": {
-    "express": "^4.16.3"
+    "ajv": "^6.5.3",
+    "koa-smart": "^2.0.2",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^9.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.5.0",
+    "expect": "^23.5.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4",
+    "rimraf": "^2.6.2",
+    "supertest": "^3.3.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "apidoc"
+    ]
   }
 }
