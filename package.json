@@ -28,8 +28,10 @@
   "dependencies": {
     "ajv": "^6.5.3",
     "koa-smart": "^2.0.2",
+    "mysql2": "^1.6.1",
     "request": "^2.88.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "sequelize": "^4.38.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
