@@ -7,11 +7,6 @@ export default class RouteUser extends Route {
     super({ ...params });
   }
 
-  @Route.Get({})
-  async hello(ctx) {
-    this.sendOk(ctx, "Hello world");
-  }
-
   @Route.Post({
     bodyType: Types.object().keys({
       username: Types.string().required(),
@@ -28,10 +23,11 @@ export default class RouteUser extends Route {
         password: body.password,
         total_session: 0
       });
-      console.log(User);
-      this.sendOk(ctx, "User registered");
+      this.sendOk();
     } catch (err) {
-      console.log(err);
+      ctx.status = err.status || 500;
+      ctx.body = err.message;
+      ctx.app.emit("error", err, ctx);
     }
   }
 
@@ -43,11 +39,18 @@ export default class RouteUser extends Route {
   })
   async Login(ctx) {
     try {
-      await User.findOne({ where: { email: this.body(ctx).email } });
-      console.log(User);
-      this.sendOk(ctx, "User logged");
+      const user = await User.findOne({
+        where: { email: this.body(ctx).email }
+      });
+
+      if (!user || !user.validPassword(this.body(ctx).password))
+        ctx.throw(400, "Incorrect email or password.");
+      ctx.body = [user.email, user.id];
+      this.send(ctx);
     } catch (err) {
-      console.log(err);
+      ctx.status = err.status || 500;
+      ctx.body = err.message;
+      ctx.app.emit("error", err, ctx);
     }
   }
 }

@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "ajv": "^6.5.3",
+    "bcrypt": "^3.0.1",
     "koa-smart": "^2.0.2",
     "mysql2": "^1.6.1",
     "request": "^2.88.0",
