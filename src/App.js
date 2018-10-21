@@ -12,6 +12,7 @@ import {
   RateLimit,
   RateLimitStores
 } from "koa-smart/middlewares";
+require("dotenv").config();
 
 // Set Default Option
 RateLimit.defaultOptions({
