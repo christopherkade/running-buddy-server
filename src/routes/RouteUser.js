@@ -95,4 +95,21 @@ export default class RouteUser extends Route {
       ctx.app.emit("error", err, ctx);
     }
   }
+
+  @Route.Delete({
+    path: "/:email"
+  })
+  async delete(ctx) {
+    try {
+      const user = await User.findOne({ where: { email: ctx.params.email } });
+
+      if (!user) ctx.throw(404, "User not found.");
+      await user.destroy();
+      this.send(ctx);
+    } catch (err) {
+      ctx.status = err.status || 500;
+      ctx.body = err.message;
+      ctx.app.emit("error", err, ctx);
+    }
+  }
 }
