@@ -93,7 +93,7 @@ export default class RouteUser extends Route {
     bodyType: Types.object().keys({
       username: Types.string().required(),
       email: Types.string().required(),
-      password: Types.string.required()
+      password: Types.string().required()
     })
   })
   async post(ctx) {
