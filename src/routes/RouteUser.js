@@ -105,11 +105,6 @@ export default class RouteUser extends Route {
       const user = await User.findOne({ where: { email: ctx.params.email } });
       if (!user) ctx.throw(404, "User not found.");
 
-      const body = this.body(ctx);
-      for (var value in body) {
-        if (body[value] != "") user.update({ username: body });
-        // console.log(`BODY.${value} = ${body[value]}`);
-      }
       await user.update({
         username: this.body(ctx).username,
         email: this.body(ctx).email,
