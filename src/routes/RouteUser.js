@@ -1,6 +1,9 @@
 import { Types } from "koa-smart";
 import Route from "./Route";
+import { __await } from "../../node_modules/tslib/tslib";
 const User = require("../models/index").User;
+const jwt = require("jsonwebtoken");
+const verifyToken = require("../middlewares/verifyToken");
 
 export default class RouteUser extends Route {
   constructor(params) {
@@ -22,7 +25,13 @@ export default class RouteUser extends Route {
         password: this.body(ctx).password,
         total_session: 0
       });
-      this.sendOk(ctx);
+      const token = await jwt.sign(
+        { id: user.id, email: user.email },
+        process.env.JWT_SECRET,
+        { expiresIn: 86400 }
+      );
+      ctx.body = { token: token };
+      this.send(ctx);
     } catch (err) {
       ctx.status = err.status || 500;
       ctx.body = err.message;
@@ -44,7 +53,12 @@ export default class RouteUser extends Route {
 
       if (!user || !user.validPassword(this.body(ctx).password))
         ctx.throw(400, "Incorrect email or password.");
-      ctx.body = [user.email, user.id];
+      const token = await jwt.sign(
+        { id: user.id, email: user.email },
+        process.env.JWT_SECRET,
+        { expiresIn: 86400 }
+      );
+      ctx.body = { token: token };
       this.send(ctx);
     } catch (err) {
       ctx.status = err.status || 500;
@@ -58,9 +72,13 @@ export default class RouteUser extends Route {
   })
   async get(ctx) {
     try {
-      const user = await User.findOne({ where: { email: ctx.params.email } });
+      const decoded = await verifyToken(ctx);
+      if (decoded == -1 || decoded.email != ctx.params.email)
+        ctx.throw(403, "Forbidden.");
 
+      const user = await User.findOne({ where: { email: ctx.params.email } });
       if (!user) ctx.throw(404, "User not found.");
+
       ctx.body = user;
       this.send(ctx);
     } catch (err) {
@@ -75,14 +93,23 @@ export default class RouteUser extends Route {
     bodyType: Types.object().keys({
       username: Types.string().required(),
       email: Types.string().required(),
-      password: Types.string().required()
+      password: Types.string.required()
     })
   })
   async post(ctx) {
     try {
-      const user = await User.findOne({ where: { email: ctx.params.email } });
+      const decoded = await verifyToken(ctx);
+      if (decoded == -1 || decoded.email != ctx.params.email)
+        ctx.throw(403, "Forbidden.");
 
-      if (!user) ctx.throw(404, "User not found");
+      const user = await User.findOne({ where: { email: ctx.params.email } });
+      if (!user) ctx.throw(404, "User not found.");
+
+      const body = this.body(ctx);
+      for (var value in body) {
+        if (body[value] != "") user.update({ username: body });
+        // console.log(`BODY.${value} = ${body[value]}`);
+      }
       await user.update({
         username: this.body(ctx).username,
         email: this.body(ctx).email,
@@ -101,9 +128,13 @@ export default class RouteUser extends Route {
   })
   async delete(ctx) {
     try {
-      const user = await User.findOne({ where: { email: ctx.params.email } });
+      const decoded = await verifyToken(ctx);
+      if (decoded == -1 || decoded.email != ctx.params.email)
+        ctx.throw(403, "Forbidden.");
 
+      const user = await User.findOne({ where: { email: ctx.params.email } });
       if (!user) ctx.throw(404, "User not found.");
+
       await user.destroy();
       this.send(ctx);
     } catch (err) {

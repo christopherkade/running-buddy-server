@@ -2,15 +2,17 @@
 
 ## How to deploy
 
-In order to deploy the _Running Buddy - Server_ you need to have a mysql database configured as described in `src/config/config.json` or to adapt the file to match yours.  
+In order to deploy the **Running Buddy - Server** you need to have a mysql database configured as described in `src/config/config.json` or to adapt the file to match yours.  
 You also need to have `yarn` installed.
 
 ### Installation instructions
 
-Run the following commands :  
-`yarn`  
-`sequelize db:migrate`  
-Please note that there is no seeds at all, so you need to create entries in db by yourself.
+Run the following commands :
+
+- `yarn`
+- Copy `.env.example` as `.env` in the root directory and change the value of `JWT_SECRET` to a secure and long password.
+- `sequelize db:migrate`  
+  _Please note that there is no seeds at all, so you need to create entries in db by yourself._
 
 ## How to launch the server
 
