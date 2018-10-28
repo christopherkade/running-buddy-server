@@ -3,7 +3,7 @@ import Route from "./Route";
 import { __await } from "../../node_modules/tslib/tslib";
 const User = require("../models/index").User;
 const jwt = require("jsonwebtoken");
-const verifyToken = require("../middlewares/verifyToken");
+const verifyToken = require("../middlewares/VerifyToken");
 
 export default class RouteUser extends Route {
   constructor(params) {
@@ -93,7 +93,7 @@ export default class RouteUser extends Route {
     bodyType: Types.object().keys({
       username: Types.string().required(),
       email: Types.string().required(),
-      password: Types.string.required()
+      password: Types.string().required()
     })
   })
   async post(ctx) {
@@ -105,6 +105,13 @@ export default class RouteUser extends Route {
       const user = await User.findOne({ where: { email: ctx.params.email } });
       if (!user) ctx.throw(404, "User not found.");
 
+      // const reqBody = this.body(ctx);
+      // for (var value in reqBody) {
+      //   if (reqBody[value] != "") {
+      //     await user.update({ value: reqBody[value] });
+      //     console.log(value, ":", reqBody[value], "\n");
+      //   }
+      // }
       await user.update({
         username: this.body(ctx).username,
         email: this.body(ctx).email,
