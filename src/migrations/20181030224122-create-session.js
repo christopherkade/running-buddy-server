@@ -15,10 +15,6 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      address: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       district: {
         allowNull: false,
         type: Sequelize.INTEGER
@@ -26,10 +22,6 @@ module.exports = {
       start: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      owner_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

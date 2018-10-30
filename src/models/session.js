@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
   const Session = sequelize.define(
-    "Sessions",
+    "Session",
     {
       title: {
         allowNull: false,
@@ -19,10 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       start: {
         allowNull: false,
         type: DataTypes.DATE
-      },
-      owner_id: {
-        allowNull: false,
-        type: DataTypes.INTEGER
       }
     },
     {}
