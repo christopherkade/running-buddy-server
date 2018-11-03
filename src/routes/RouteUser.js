@@ -2,8 +2,10 @@ import { Types } from "koa-smart";
 import Route from "./Route";
 import { __await } from "../../node_modules/tslib/tslib";
 const User = require("../models/index").User;
+const Session = require("../models/index").Session;
+const UserSession = require("../models/index").UserSession;
 const jwt = require("jsonwebtoken");
-const verifyToken = require("../middlewares/verifyToken");
+const verifyToken = require("../middlewares/VerifyToken");
 
 export default class RouteUser extends Route {
   constructor(params) {
@@ -19,7 +21,7 @@ export default class RouteUser extends Route {
   })
   async Register(ctx) {
     try {
-      await User.create({
+      const user = await User.create({
         username: this.body(ctx).username,
         email: this.body(ctx).email,
         password: this.body(ctx).password,
@@ -73,10 +75,12 @@ export default class RouteUser extends Route {
   async get(ctx) {
     try {
       const decoded = await verifyToken(ctx);
-      if (decoded == -1 || decoded.email != ctx.params.email)
-        ctx.throw(403, "Forbidden.");
+      if (decoded == -1) ctx.throw(403, "Forbidden.");
 
-      const user = await User.findOne({ where: { email: ctx.params.email } });
+      const user = await User.findOne({
+        where: { email: ctx.params.email },
+        include: [{ model: Session, as: "runSession" }]
+      });
       if (!user) ctx.throw(404, "User not found.");
 
       ctx.body = user;
@@ -105,6 +109,16 @@ export default class RouteUser extends Route {
       const user = await User.findOne({ where: { email: ctx.params.email } });
       if (!user) ctx.throw(404, "User not found.");
 
+      // This should work but actually don't
+      // And I don't have time to check why
+      // So we use the ugly code after.
+      // const reqBody = this.body(ctx);
+      // for (var value in reqBody) {
+      //   if (reqBody[value] != "") {
+      //     await user.update({ value: reqBody[value] });
+      //     console.log(value, ":", reqBody[value], "\n");
+      //   }
+      // }
       await user.update({
         username: this.body(ctx).username,
         email: this.body(ctx).email,
@@ -130,6 +144,7 @@ export default class RouteUser extends Route {
       const user = await User.findOne({ where: { email: ctx.params.email } });
       if (!user) ctx.throw(404, "User not found.");
 
+      await UserSession.destroy({ where: { userId: user.id } });
       await user.destroy();
       this.send(ctx);
     } catch (err) {

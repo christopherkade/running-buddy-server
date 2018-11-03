@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      ownerId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       title: {
         allowNull: false,
         type: Sequelize.STRING
@@ -26,10 +30,6 @@ module.exports = {
       start: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      owner_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

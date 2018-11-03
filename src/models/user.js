@@ -27,7 +27,12 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.associate = function(models) {
-    // associations can be defined here
+    User.belongsToMany(models.Session, {
+      through: "UserSession",
+      as: "runSession",
+      foreignKey: "userId",
+      onDelete: "cascade"
+    });
   };
 
   User.prototype.validPassword = function(password) {

@@ -1,8 +1,12 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
   const Session = sequelize.define(
-    "Sessions",
+    "Session",
     {
+      ownerId: {
+        allowNull: false,
+        type: DataTypes.INTEGER
+      },
       title: {
         allowNull: false,
         type: DataTypes.STRING
@@ -19,16 +23,17 @@ module.exports = (sequelize, DataTypes) => {
       start: {
         allowNull: false,
         type: DataTypes.DATE
-      },
-      owner_id: {
-        allowNull: false,
-        type: DataTypes.INTEGER
       }
     },
     {}
   );
   Session.associate = function(models) {
-    // associations can be defined here
+    Session.belongsToMany(models.User, {
+      through: "UserSession",
+      as: "runner",
+      foreignKey: "sessionId",
+      onDelete: "cascade"
+    });
   };
   return Session;
 };

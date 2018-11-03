@@ -1,67 +1,1 @@
-define({ "api": [
-  {
-    "type": "get",
-    "url": "/example/:id",
-    "title": "",
-    "group": "Example",
-    "permission": [
-      {
-        "name": "public"
-      }
-    ],
-    "version": "0.0.0",
-    "filename": "/home/djengo/Documents/dev/koa/koa-smart-boilerplate/node_modules/koa-smart/dist/ApiDocTmp/example/-id.js",
-    "groupTitle": "Example",
-    "name": "GetExampleId"
-  },
-  {
-    "type": "post",
-    "url": "/example",
-    "title": "",
-    "group": "Example",
-    "permission": [
-      {
-        "name": "public"
-      }
-    ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "email",
-            "description": "<p>It should be a string.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "password",
-            "description": "<p>It should be a string.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "/home/djengo/Documents/dev/koa/koa-smart-boilerplate/node_modules/koa-smart/dist/ApiDocTmp/example.js",
-    "groupTitle": "Example",
-    "name": "PostExample"
-  },
-  {
-    "type": "get",
-    "url": "/",
-    "title": "",
-    "group": "Index",
-    "permission": [
-      {
-        "name": "public"
-      }
-    ],
-    "version": "0.0.0",
-    "filename": "/home/djengo/Documents/dev/koa/koa-smart-boilerplate/node_modules/koa-smart/dist/ApiDocTmp/Index.js",
-    "groupTitle": "Index",
-    "name": "Get"
-  }
-] });
+define({ "api": [  {    "type": "delete",    "url": "/session/:id",    "title": "",    "group": "Session",    "permission": [      {        "name": "public"      }    ],    "version": "0.0.0",    "filename": "/Users/xavier/Work/EPITECH/epi_repos/running-buddy-server/node_modules/koa-smart/dist/ApiDocTmp/session/-id.js",    "groupTitle": "Session",    "name": "DeleteSessionId"  },  {    "type": "get",    "url": "/session/all",    "title": "",    "group": "Session",    "permission": [      {        "name": "public"      }    ],    "version": "0.0.0",    "filename": "/Users/xavier/Work/EPITECH/epi_repos/running-buddy-server/node_modules/koa-smart/dist/ApiDocTmp/session/all.js",    "groupTitle": "Session",    "name": "GetSessionAll"  },  {    "type": "get",    "url": "/session/district/:district",    "title": "",    "group": "Session",    "permission": [      {        "name": "public"      }    ],    "version": "0.0.0",    "filename": "/Users/xavier/Work/EPITECH/epi_repos/running-buddy-server/node_modules/koa-smart/dist/ApiDocTmp/session/district/-district.js",    "groupTitle": "Session",    "name": "GetSessionDistrictDistrict"  },  {    "type": "post",    "url": "/session/create",    "title": "",    "group": "Session",    "permission": [      {        "name": "public"      }    ],    "parameter": {      "fields": {        "Parameter": [          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "title",            "description": "<p>It should be a string.</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "description",            "description": "<p>It should be a string.</p>"          },          {            "group": "Parameter",            "type": "Date",            "optional": false,            "field": "start",            "description": "<p>It should be a date.</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "address",            "description": "<p>It should be a string.</p>"          },          {            "group": "Parameter",            "type": "Number",            "optional": false,            "field": "district",            "description": "<p>It should be a number.</p>"          }        ]      }    },    "version": "0.0.0",    "filename": "/Users/xavier/Work/EPITECH/epi_repos/running-buddy-server/node_modules/koa-smart/dist/ApiDocTmp/session/create.js",    "groupTitle": "Session",    "name": "PostSessionCreate"  },  {    "type": "post",    "url": "/session/join/:id",    "title": "",    "group": "Session",    "permission": [      {        "name": "public"      }    ],    "version": "0.0.0",    "filename": "/Users/xavier/Work/EPITECH/epi_repos/running-buddy-server/node_modules/koa-smart/dist/ApiDocTmp/session/join/-id.js",    "groupTitle": "Session",    "name": "PostSessionJoinId"  },  {    "type": "delete",    "url": "/user/:email",    "title": "",    "group": "User",    "permission": [      {        "name": "public"      }    ],    "version": "0.0.0",    "filename": "/Users/xavier/Work/EPITECH/epi_repos/running-buddy-server/node_modules/koa-smart/dist/ApiDocTmp/user/-email.js",    "groupTitle": "User",    "name": "DeleteUserEmail"  },  {    "type": "post",    "url": "/user/login",    "title": "",    "group": "User",    "permission": [      {        "name": "public"      }    ],    "parameter": {      "fields": {        "Parameter": [          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "email",            "description": "<p>It should be a string.</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "password",            "description": "<p>It should be a string.</p>"          }        ]      }    },    "version": "0.0.0",    "filename": "/Users/xavier/Work/EPITECH/epi_repos/running-buddy-server/node_modules/koa-smart/dist/ApiDocTmp/user/login.js",    "groupTitle": "User",    "name": "PostUserLogin"  },  {    "type": "post",    "url": "/user/register",    "title": "",    "group": "User",    "permission": [      {        "name": "public"      }    ],    "parameter": {      "fields": {        "Parameter": [          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "username",            "description": "<p>It should be a string.</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "email",            "description": "<p>It should be a string.</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "password",            "description": "<p>It should be a string.</p>"          }        ]      }    },    "version": "0.0.0",    "filename": "/Users/xavier/Work/EPITECH/epi_repos/running-buddy-server/node_modules/koa-smart/dist/ApiDocTmp/user/register.js",    "groupTitle": "User",    "name": "PostUserRegister"  }] });
