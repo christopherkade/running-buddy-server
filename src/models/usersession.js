@@ -1,23 +1,17 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
   const UserSession = sequelize.define(
-    'userSession',
+    "UserSession",
     {
       sessionId: {
         allowNull: false,
         type: DataTypes.INTEGER
-      } 
-      ownerId: 
-      {
+      },
+      userId: {
         allowNull: false,
         type: DataTypes.INTEGER
       }
-      usersId: 
-      {
-        allowNull: false,
-        type: DataTypes.INTEGER
-      }
-    }, 
+    },
     {}
   );
   UserSession.associate = function(models) {
@@ -25,4 +19,3 @@ module.exports = (sequelize, DataTypes) => {
   };
   return UserSession;
 };
-

@@ -19,7 +19,7 @@ export default class RouteUser extends Route {
   })
   async Register(ctx) {
     try {
-      await User.create({
+      const user = await User.create({
         username: this.body(ctx).username,
         email: this.body(ctx).email,
         password: this.body(ctx).password,

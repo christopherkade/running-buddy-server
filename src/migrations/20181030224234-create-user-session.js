@@ -10,15 +10,19 @@ module.exports = {
       },
       sessionId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Sessions",
+          key: "id"
+        }
       },
-      ownerId: {
+      userId: {
         allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      usersId: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,

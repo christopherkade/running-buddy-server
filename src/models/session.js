@@ -3,6 +3,10 @@ module.exports = (sequelize, DataTypes) => {
   const Session = sequelize.define(
     "Session",
     {
+      ownerId: {
+        allowNull: false,
+        type: DataTypes.INTEGER
+      },
       title: {
         allowNull: false,
         type: DataTypes.STRING
@@ -24,7 +28,11 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Session.associate = function(models) {
-    // associations can be defined here
+    Session.belongsToMany(models.User, {
+      through: "UserSession",
+      as: "users",
+      foreignKey: "sessionId"
+    });
   };
   return Session;
 };
