@@ -30,8 +30,9 @@ module.exports = (sequelize, DataTypes) => {
   Session.associate = function(models) {
     Session.belongsToMany(models.User, {
       through: "UserSession",
-      as: "users",
-      foreignKey: "sessionId"
+      as: "runner",
+      foreignKey: "sessionId",
+      onDelete: "cascade"
     });
   };
   return Session;

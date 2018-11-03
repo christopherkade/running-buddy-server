@@ -19,6 +19,10 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      address: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       district: {
         allowNull: false,
         type: Sequelize.INTEGER
