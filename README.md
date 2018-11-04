@@ -7,8 +7,8 @@ This backend is build on `NodeJS` using the `koa-smart` framework based on `Koaj
 
 ## Prerequisites
 
-In order to deploy **Running Buddy - Server** you need to adapt the configuration of your mysql instance in `src/config/config.json` and have `yarn` installed.  
-Then you need to copy the file `.env.example` as `.env` in root directory and chang the value of `JWT_SECRET` to a secure and long password (it is the password that will be use to create the JWT tokens).
+In order to deploy **Running Buddy - Server** you need to have mysql installed and running and you need to adapt the configuration matching your mysql instance in `src/config/config.json` and have `yarn` installed.  
+Then you need to copy the file `.env.example` as `.env` in root directory and chang the value of `JWT_SECRET` to a secure and long password (it is the password that will be use to create and verify the JWT tokens).
 
 ## Deployement instructions
 
