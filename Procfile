@@ -1,1 +1,2 @@
-web: npm install && npm run build-prod && npm run prod
+release: npm install && sequelize db:create --env=production && db:migrate && npm run build-prod
+web: npm run prod
