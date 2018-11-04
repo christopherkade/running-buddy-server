@@ -17,7 +17,7 @@
   "homepage": "https://github.com/christopherkade/running-buddy-server#readme",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
-    "start": "npm run prod",
+    "start": "npm run dev",
     "prod": "node dist/index.js",
     "_rm-build-prod": "rimraf dist",
     "_build-prod": "cross-env NODE_ENV=production babel src --out-dir dist --copy-files",
