@@ -113,10 +113,6 @@ export default class RouteSession extends Route {
       if (!session) ctx.throw(404, "Session not found.");
 
       if (decoded.id == session.ownerId) {
-        // const joinSessions = await UserSession.findOne({
-        //   where: { sessionId: ctx.params.id }
-        // });
-        // await joinSessions.destroy();
         await UserSession.destroy({ where: { sessionId: ctx.params.id } });
         await session.destroy();
       } else ctx.throw(403, "You are not the owner of the session.");
