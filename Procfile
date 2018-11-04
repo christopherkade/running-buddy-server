@@ -1,1 +1,1 @@
-web: npm run prod
+web: yarn && sequelize db:create --env=production && sequelize db:migrate --env=production && yarn build-prod && yarn run prod

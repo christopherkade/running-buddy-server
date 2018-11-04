@@ -1,4 +1,11 @@
 {
+  "production": {
+    "username": "b747c2c079a766",
+    "password": "60386c08",
+    "database": "heroku_2e1a5da0cf30503",
+    "host": "us-cdbr-iron-east-01.cleardb.net",
+    "dialect": "mysql"
+  },
   "development": {
     "username": "root",
     "password": "root",
@@ -11,13 +18,6 @@
     "password": "root",
     "database": "running-buddy_dev",
     "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "b747c2c079a766",
-    "password": "60386c08",
-    "database": "heroku_2e1a5da0cf30503",
-    "host": "us-cdbr-iron-east-01.cleardb.net",
     "dialect": "mysql"
   }
 }
