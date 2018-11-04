@@ -1,5 +1,5 @@
-web: yarn
+web: npm install
 web: sequelize db:create --env=production
 web: sequelize db:migrate --env=production
-web: yarn build-prod
-web: yarn prod
+web: npm build-prod
+web: npm prod
