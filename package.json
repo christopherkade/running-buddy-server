@@ -17,7 +17,7 @@
   "homepage": "https://github.com/christopherkade/running-buddy-server#readme",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
-    "start": "sequelize db:create --env=production && sequelize db:migrate --env=production && yarn build-prod && yarn run prod",
+    "start": "npm run prod",
     "prod": "node dist/index.js",
     "_rm-build-prod": "rimraf dist",
     "_build-prod": "cross-env NODE_ENV=production babel src --out-dir dist --copy-files",
@@ -34,7 +34,9 @@
     "mysql2": "^1.6.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
-    "sequelize": "^4.38.1"
+    "rimraf": "^2.6.2",
+    "sequelize": "^4.38.1",
+    "sequelize-cli": "^5.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -56,7 +58,6 @@
     "mocha": "^5.2.0",
     "nodemon": "^1.18.4",
     "prettier": "^1.14.2",
-    "rimraf": "^2.6.2",
     "supertest": "^3.3.0"
   },
   "nodemonConfig": {
